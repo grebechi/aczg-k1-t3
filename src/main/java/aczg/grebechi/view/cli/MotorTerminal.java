@@ -41,14 +41,12 @@ public class MotorTerminal {
         this.gerenciadorHistorico = gerenciador;
     }
 
-    public void acessarQuadro(String nomeQuadro) {
-        this.contextoAtual = ContextoCLI.DENTRO_DO_QUADRO;
-        this.indicadorLocal = nomeQuadro;
+    public void setIndicadorLocal(String indicadorLocal) {
+        this.indicadorLocal = indicadorLocal;
     }
 
-    public void voltarAoMenu() {
-        this.contextoAtual = ContextoCLI.MENU_PRINCIPAL;
-        this.indicadorLocal = "sem-quadro";
+    public void setContextoAtual(ContextoCLI contextoAtual) {
+        this.contextoAtual = contextoAtual;
     }
 
     public void iniciar() {
