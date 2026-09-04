@@ -45,6 +45,10 @@ public class MotorTerminal {
         this.indicadorLocal = indicadorLocal;
     }
 
+    public String getIndicadorLocal() {
+        return indicadorLocal;
+    }
+
     public void setContextoAtual(ContextoCLI contextoAtual) {
         this.contextoAtual = contextoAtual;
     }

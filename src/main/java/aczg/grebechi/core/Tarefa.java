@@ -1,5 +1,7 @@
 package aczg.grebechi.core;
 
+import aczg.grebechi.util.DataUtil;
+
 import java.time.LocalDate;
 
 public class Tarefa {
@@ -51,7 +53,7 @@ public class Tarefa {
 
     @Override
     public String toString() {
-        return String.format("[%d] %s (Prioridade: %d, Categoria: %s, Status: %s) - Vence em: %s",
-                id, nome, prioridade, categoria, status.getDescricao(), dataTermino);
+        return String.format("[%d] %s (Prioridade: %d, Categoria: %s, Status: %s [%s]) - Vence em: %s",
+                id, nome, prioridade, categoria, status.getDescricao(), status.name(), DataUtil.formatarCurto(dataTermino));
     }
 }

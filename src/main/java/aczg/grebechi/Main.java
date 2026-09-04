@@ -17,6 +17,8 @@ public class Main {
         ComandoHistorico cmdHistorico = new ComandoHistorico();
         QuadroService quadroService = new QuadroService();
         ComandoQuadro cmdQuadro = new ComandoQuadro(quadroService, motor);
+        ComandoTarefa cmdTarefa = new ComandoTarefa(quadroService, motor);
+        motor.registrarComando(ContextoCLI.DENTRO_DO_QUADRO, cmdTarefa);
         motor.registrarComando(ContextoCLI.DENTRO_DO_QUADRO, new ComandoVoltar(motor));
         motor.registrarComando(ContextoCLI.GLOBAL, cmdQuadro);
         motor.registrarComando(ContextoCLI.GLOBAL, new ComandoLimpar());

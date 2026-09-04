@@ -8,6 +8,7 @@ public class ConsoleUtil {
     public static final String VERDE = "\u001B[32m";
     public static final String CIANO = "\u001B[36m";
     public static final String AMARELO = "\u001B[33m";
+    public static final String VERMELHO = "\u001B[31m";
     public static final String ROXO = "\u001B[35m";
     private static final String LIMPAR_TELA = "\033[H\033[2J";
 
