@@ -3,6 +3,7 @@ package aczg.grebechi.service;
 import aczg.grebechi.core.Quadro;
 import aczg.grebechi.core.Status;
 import aczg.grebechi.core.Tarefa;
+import aczg.grebechi.repository.RepositorioQuadro;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -11,8 +12,17 @@ import java.util.Map;
 
 public class QuadroService {
 
-    // Simula nosso banco de dados em memória
     private final Map<String, Quadro> quadros = new HashMap<>();
+    private final RepositorioQuadro repositorio;
+
+    public QuadroService() {
+        this.repositorio = new RepositorioQuadro();
+
+        Map<String, Quadro> quadrosCarregados = this.repositorio.carregarTodos();
+        if (quadrosCarregados != null && !quadrosCarregados.isEmpty()) {
+            this.quadros.putAll(quadrosCarregados);
+        }
+    }
 
     public void criarQuadro(String nome) {
         if (nome == null || nome.trim().isEmpty()) {
@@ -25,7 +35,10 @@ public class QuadroService {
             throw new IllegalArgumentException("Já existe um quadro com o nome '" + nomeFormatado + "'.");
         }
 
-        quadros.put(nomeFormatado, new Quadro(nomeFormatado));
+        Quadro novoQuadro = new Quadro(nomeFormatado);
+        quadros.put(nomeFormatado, novoQuadro);
+
+        repositorio.salvar(novoQuadro);
     }
 
     public Quadro getQuadro(String nome) {
@@ -48,6 +61,8 @@ public class QuadroService {
         }
 
         quadros.remove(nomeFormatado);
+
+        repositorio.deletar(nomeFormatado);
     }
 
     public void renomearQuadro(String nomeAntigo, String nomeNovo) {
@@ -69,6 +84,10 @@ public class QuadroService {
         Quadro quadro = quadros.remove(antigoFormatado);
         quadro.setNome(novoFormatado);
         quadros.put(novoFormatado, quadro);
+
+        // DELETA O ARQUIVO VELHO E SALVA O NOVO
+        repositorio.deletar(antigoFormatado);
+        repositorio.salvar(quadro);
     }
 
     public Tarefa adicionarTarefa(String nomeQuadro, String nome, String descricao, LocalDate dataTermino, int prioridade, String categoria) {
@@ -85,7 +104,15 @@ public class QuadroService {
 
         rebalancearPrioridades(quadro);
 
+        repositorio.salvar(quadro);
+
         return novaTarefa;
+    }
+
+    public void salvarQuadro(Quadro quadro) {
+        if (quadro != null) {
+            repositorio.salvar(quadro);
+        }
     }
 
     private void rebalancearPrioridades(Quadro quadro) {
