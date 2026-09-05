@@ -364,6 +364,7 @@ public class ComandoTarefa implements Comando {
                     break;
                 case "0":
                     editando = false;
+                    quadroService.salvarQuadro(quadro);
                     System.out.println(ConsoleUtil.VERDE + "Alterações concluídas!" + ConsoleUtil.RESET);
                     break;
                 default:
@@ -382,6 +383,7 @@ public class ComandoTarefa implements Comando {
         if (tarefa == null) return;
 
         quadro.getTarefas().remove(tarefa);
+        quadroService.salvarQuadro(quadro);
         System.out.println(ConsoleUtil.VERDE + "Tarefa #" + tarefa.getId() + " removida com sucesso!" + ConsoleUtil.RESET);
     }
 

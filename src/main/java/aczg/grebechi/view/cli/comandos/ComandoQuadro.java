@@ -168,7 +168,7 @@ public class ComandoQuadro implements Comando {
 
                 // Se o usuário apagou o quadro em que ele estava dentro no momento, ele deve ser "expulso" para o menu principal
                 if (nomeApagar.equals(motor.getIndicadorLocal())) {
-                    motor.setIndicadorLocal("");
+                    motor.setIndicadorLocal("menu-principal");
                     // Substitua MENU_PRINCIPAL pelo Enum correspondente ao seu contexto raiz se for diferente
                     motor.setContextoAtual(ContextoCLI.MENU_PRINCIPAL);
                 }

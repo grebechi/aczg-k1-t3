@@ -11,7 +11,7 @@ public class MotorTerminal {
 
     private ContextoCLI contextoAtual = ContextoCLI.MENU_PRINCIPAL;
 
-    private String indicadorLocal = "sem-quadro";
+    private String indicadorLocal = "menu-principal";
 
     private final Scanner scanner = new Scanner(System.in);
 
